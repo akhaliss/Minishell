@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lists.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 18:38:50 by akhaliss          #+#    #+#             */
+/*   Updated: 2023/09/20 18:41:08 by akhaliss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	env_tolist(t_envir **head, t_envir *env)
 {
-	t_envir *tmp;
+	t_envir	*tmp;
 
 	if (!head || !env)
 		return ;
@@ -19,20 +31,20 @@ void	env_tolist(t_envir **head, t_envir *env)
 
 void	token_tolist(t_token **head, t_token *token)
 {
-    t_token *tmp;
+	t_token	*tmp;
 
-    if (!head || !token)
+	if (!head || !token)
 		return ;
 	tmp = *head;
-    if (*head == NULL)
-        *head = token;
-    else
-    {
-        while(tmp->next != NULL)
-            tmp->next = tmp;
-        tmp->next = token;
-        token->prev = tmp;
-    }
+	if (*head == NULL)
+		*head = token;
+	else
+	{
+		while (tmp->next != NULL)
+			tmp->next = tmp;
+		tmp->next = token;
+		token->prev = tmp;
+	}
 }
 
 void	cmd_tolist(t_exec **head, t_exec *token)

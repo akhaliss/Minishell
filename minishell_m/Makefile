@@ -1,7 +1,7 @@
 LIBFT = ./libft/libft.a
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -lreadline
-SRC =  minishell.c nodes.c lists.c env.c utils.c errors.c syntax.c
+SRC =  minishell.c nodes.c lists.c env.c utils.c errors.c syntax.c tokenize.c
 
 NAME = minishell
 OBJ_FILES=$(SRC:%.c=%.o)
