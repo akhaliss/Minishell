@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 20:14:29 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/07 16:08:49 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:17:36 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	_pipe(char **line)
 {
-	int	i;	
-
 	if ((*line)[0] != '|')
 		return (0);
-	i = 1;
+	int i = 1;
 	while ((*line)[i] && v_spaces((*line)[i]))
 		i++;
 	if ((*line)[i] != '|' && (*line)[i])
@@ -68,7 +66,7 @@ int	_redir(char **line)
 	t_type	tok;
 
 	if (**line != '>' && **line != '<')
-		return (0);
+		return 0;
 	i = 0;
 	tok = tokens((*line)[i], (*line)[i + 1]);
 	if (tok == HEREDOC || tok == APPEND)

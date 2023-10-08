@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelkace <abelkace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 08:19:09 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/07 16:03:53 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/10/06 23:22:45 by abelkace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
+# include	<unistd.h>
+# include	<stdio.h>
+# include	<stdlib.h>
 
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);

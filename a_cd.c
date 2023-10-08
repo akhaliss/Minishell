@@ -6,7 +6,7 @@
 /*   By: abelkace <abelkace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 23:47:20 by abelkace          #+#    #+#             */
-/*   Updated: 2023/10/08 14:21:34 by abelkace         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:16:29 by abelkace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,12 @@ static void	ft_chdir_fail(t_exec *node, int *exit_value)
 	if (access(node->cmd[1], F_OK) == 0)
 	{
 		write(2, "cd: ", 4);
-		ft_putstr(node->cmd[1], 2);
-		write(2, ": Not a directory\n", 18);
+		perror(node->cmd[1]);
 	}
 	else
 	{
 		write(2, "cd: ", 4);
-		ft_putstr(node->cmd[1], 2);
-		write(2, ": No such a file or directory\n", 30);
+		perror(node->cmd[1]);
 	}
 	*exit_value = 1;
 }

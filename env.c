@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelkace <abelkace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:33:48 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/07 16:38:16 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/10/07 14:31:24 by abelkace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// char **dup_env(char **env)
+// {
+//     int		i;
+// 	char	**denv;
+
+// 	i = -1;
+// 	while(env[++i])
+// 		;
+// 	denv = malloc(sizeof(char *) * (i + 1));
+// 	if(!denv)
+// 		return(NULL);
+// 	i = -1;
+// 	while(env[++i])
+// 	{
+// 		denv[i] = ft_strdup(env[i]);
+// 	}
+// 	denv[i] = NULL;
+// 	return(denv);
+// }
 
 t_en	*split_env(char *env_str, t_en *en)
 {
@@ -24,17 +44,15 @@ t_en	*split_env(char *env_str, t_en *en)
 	return (en);
 }
 
-t_envir	*t_env(char **env)
+t_envir* t_env(char **env)
 {
-	int		i;
-	t_envir	*head;
-	t_en	*_env;
-	t_envir	*tmp;
+	// if (!env || !*env)
+	// 	exit(1);//ignore env
+	int i = 0;
+	t_en *_env = malloc(sizeof(t_en));
 
-	i = 0;
-	_env = malloc(sizeof(t_en));
-	head = NULL;
-	tmp = NULL;
+	t_envir *head = NULL;
+	t_envir *tmp = NULL;
 	i = 0;
 	while (env[i])
 	{
@@ -81,5 +99,7 @@ char	*split_env_var(char *env_str, t_envir *env)
 				return (free(env_str), ft_strdup(env->value));
 		env = env->next;
 	}
-	return (free(env_str), ft_strdup(""));
+	return(ft_strdup(""));
 }
+
+

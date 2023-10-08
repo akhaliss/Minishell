@@ -6,7 +6,7 @@
 /*   By: abelkace <abelkace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:52:49 by abelkace          #+#    #+#             */
-/*   Updated: 2023/10/07 23:38:32 by abelkace         ###   ########.fr       */
+/*   Updated: 2023/10/08 20:45:47 by abelkace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ char	**ft_env_tab(t_envir *env)
 		env = env->next;
 	}
 	env = envp;
-	tab[i] = NULL;
-	return (tab);
+	return (tab[i] = NULL, tab);
 }
 
 static void	ft_exec_fail(t_exec *node, int *exit_value)
@@ -79,7 +78,7 @@ static void	ft_joined_path(t_exec *node, t_envir *envp, char **path, int i)
 		if (access(str, F_OK) == 0 && access(str, X_OK) == 0)
 		{
 			execve(str, node->cmd, ft_env_tab(envp));
-			break ;
+			exit(1);
 		}
 	}
 }
@@ -103,11 +102,9 @@ void	command_exec(t_exec *node, t_envir *env, int *exit_value)
 	if (access(node->cmd[0], F_OK) == 0 && access(node->cmd[0], X_OK) == 0)
 	{
 		execve(node->cmd[0], node->cmd, ft_env_tab(env));
+		exit(1);
 	}
 	else
-	{
-		i = 0;
-		ft_joined_path(node, env, path, i);
-	}
+		ft_joined_path(node, env, path, 0);
 	ft_exec_fail(node, exit_value);
 }

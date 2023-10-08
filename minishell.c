@@ -3,45 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelkace <abelkace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:41:26 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/08 17:44:56 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:54:28 by abelkace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parsing(t_token **line, char *str, t_envir **env, size_t *i)
+void	t_break(void)
 {
-	t_type	token;
-
-	token = tokens(str[*i], str[*i + 1]);
-	if (token == HEREDOC)
-		ft_heredoc(line, str, token, i);
-	else if (token == APPEND)
-		ft_append(line, token, i);
-	else if (token == OUT)
-		ft_out(line, token, i);
-	else if (token == IN)
-		ft_in(line, token, i);
-	else if (token == PIPE)
-		ft_pipe(line, token, i);
-	else if (token == WORD)
-		ft_word(line, str, env, i);
+	ft_putendl_fd("\nexit", STDOUT_FILENO);
+	exit(EXIT_SUCCESS);
+}
+void	syn_er(void)
+{
+	ft_putendl_fd("syntax error", STDOUT_FILENO);
+	
 }
 
-void	parsed_tok(t_token **line, char *str, t_envir **env)
+void	voided(int ac, char **av)
 {
-	size_t	i;
+	(void)av;
+	(void)ac;
+}
 
-	i = 0;
-	while (str[i] != '\0')
+
+int	line_syntax(char *line)
+{
+
+	if (*line == '|')
 	{
-		while (str[i] && v_spaces(str[i]))
-			i++;
-		parsing(line, str, env, &i);
+		stx_error();
+		return (0);
 	}
+	while (*line)
+	{
+		while (v_spaces(*line))
+			line++; 
+		if ( !_pipe(&line) && !_redir(&line) && valid_quotes(&line) )
+			line++;
+		else
+			return (stx_error(), 0);
+	}
+	return (1);
+}
+
+void print_exec(t_exec *e)
+{
+	int i = 0;
+	while (e->cmd[i])
+		printf("%s - ", e->cmd[i++]);
+	printf("\n%d\n", e->in_fd);
+	printf("%d\n", e->out_fd);
+	printf("%p\n", e->next);
+	printf("%p\n", e->prev);
 }
 
 void	parse(char *line, t_envir **env, t_token **tmp, t_exec **mini)
@@ -51,8 +68,19 @@ void	parse(char *line, t_envir **env, t_token **tmp, t_exec **mini)
 	exit_status = 0;
 	parsed_tok(tmp, line, env);
 	to_exec(mini, tmp/*, env*/);
+	// t_exec *t = *mini;
+	// while (t) {
+	// 	print_exec(t);
+	// 	printf("-------------\n");
+	// 	t = t->next;
+	// }
 	ft_execute(env, *mini, &exit_status);
 }
+
+// void lek(void)
+// {
+// 	system("leaks minishel");
+// }
 
 int	main(int ac, char **av, char **env)
 {
@@ -61,25 +89,27 @@ int	main(int ac, char **av, char **env)
 	t_token	*tmp;
 	t_exec	*mini;
 
+	mini = NULL;
+	tmp = NULL;
 	voided(ac, av);
 	_env = t_env(env);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		mini = NULL;
-		tmp = NULL;
+		// atexit(lek);
 		ft_signal();
 		// rl_catch_signals = 0;
-		line = ft_strtrim(readline("Minishell$ "), " \v\t\r\f");
+		line = readline("Minishell$ ");
+		line = ft_strtrim(line, " \v\t\r\f");
 		if (!line)
 			t_break();
-		if (ft_strlen(line))
-			add_history(line);
+		add_history(line);
 		if (line_syntax(line))
+		{
 			parse(line, &_env, &tmp, &mini);
-
-		free_token_list(tmp);
-		free_exec_list(mini);
+		}
+		free_token_list(&tmp);
+		free_exec_list(&mini);
 		free(line);
 	}
 	free_env(&_env);

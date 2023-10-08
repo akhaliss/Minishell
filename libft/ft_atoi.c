@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 08:57:53 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/07 16:04:22 by akhaliss         ###   ########.fr       */
+/*   Updated: 2022/11/12 17:40:10 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_atoi(const char *str)
 	{
 		if (str[i] == '-')
 			sign *= (-1);
-		i++;
+			i++;
 	}
 	while (str[i] && (str[i] >= 48 && str[i] <= 57))
 	{

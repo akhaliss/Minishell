@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 08:57:38 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/07 16:03:58 by akhaliss         ###   ########.fr       */
+/*   Updated: 2022/11/16 09:57:48 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		if (s[l] == (char)c)
 			return ((char *) &s[l]);
-		l--;
+			l--;
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:38:55 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/07 16:06:46 by akhaliss         ###   ########.fr       */
+/*   Updated: 2022/11/16 09:57:18 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static size_t	ft_lenw(char *c, char s, size_t j)
 {
 	while (c[j] && c[j] != s)
-	{
+	{	
 		j++;
 	}
 	return (j);

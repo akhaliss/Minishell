@@ -6,7 +6,7 @@
 /*   By: abelkace <abelkace@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 03:15:14 by abelkace          #+#    #+#             */
-/*   Updated: 2023/10/08 16:36:05 by abelkace         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:40:53 by abelkace         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_env(t_exec *node, t_envir *env, int *exit_value)
 	t_envir	*envp;
 
 	envp = env;
-	puts("__________________");
 	if (node->cmd[1])
 	{
 		write (2, "env: ", 5);

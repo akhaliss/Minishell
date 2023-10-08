@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:12:31 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/07 16:06:31 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:13:03 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	{
 		if (s1[i] != s2[i])
 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+			i++;
 	}
 	return (0);
 }
