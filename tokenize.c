@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 20:18:47 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/08 15:19:08 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:28:03 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ void	ft_word(t_token **line, char *str, t_envir **env, size_t *i)
 		if (str[*i] == '\'')
 			s = ft_strjoin(s, ft_single(str, i));
 		else if (str[*i] == '"')
+		{
 			s = ft_strjoin(s, ft_double(*env, str, i));
+		}
 		else if (str[*i] == '$')
-			s = ft_strjoin(s, expand_var(*env, str, i));
+			s = ft_strjoin(s, ft_expandvar(*env, str, i));
 		else
 		{
 			while (str[*i] && str[*i] != '\'' && str[*i] != '"'
@@ -96,7 +98,9 @@ char	*ft_double(t_envir *env, char *s, size_t *i)
 		while (s[*i] && s[*i] != '"')
 		{
 			if (s[*i] == '$')
+			{
 				keep = ft_strjoin(keep, expand_var(env, s, i));
+			}
 			else
 			{
 				keep = ft_strjoin(keep, ft_substr(s, *i, 1));

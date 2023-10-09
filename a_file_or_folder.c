@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a_file_or_folder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelkace <abelkace@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:57:31 by abelkace          #+#    #+#             */
-/*   Updated: 2023/10/06 20:54:26 by abelkace         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:17:40 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	ft_file_or_folder(t_exec *node, t_envir *env, int *exit_value)
 	}
 	else
 	{
-		perror("stat");
+		write(2, "minishell: ", 11);
+		perror(node->cmd[0]);
 		*exit_value = 127;
 		exit (127);
 	}

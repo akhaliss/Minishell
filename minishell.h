@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:44:52 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/08 17:42:40 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:51:17 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void		ft_unset(t_exec *node, t_envir **env);
 void		handle_sigterm(void);
 void		ft_signal(void);
 void		lets_export(int flag, t_exec *node, t_envir **env, int i);
+char	*ft_expandvar(t_envir *_env, char *s, size_t *i);
 
 
 #endif
