@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 20:18:47 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/09 14:28:03 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:37:53 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_type	tokens(char c, char cc)
 void	ft_word(t_token **line, char *str, t_envir **env, size_t *i)
 {
 	char	*s;
+	char	*tmp;
 
 	s = ft_strdup("");
 	if (!s)
@@ -41,19 +42,18 @@ void	ft_word(t_token **line, char *str, t_envir **env, size_t *i)
 		if (str[*i] == '\'')
 			s = ft_strjoin(s, ft_single(str, i));
 		else if (str[*i] == '"')
-		{
 			s = ft_strjoin(s, ft_double(*env, str, i));
-		}
 		else if (str[*i] == '$')
-			s = ft_strjoin(s, ft_expandvar(*env, str, i));
+		{
+			tmp = ft_expandvar(*env, str, i);
+			if (!tmp)
+				return ;
+			s = ft_strjoin(s, tmp);
+		}
 		else
 		{
-			while (str[*i] && str[*i] != '\'' && str[*i] != '"'
-				&& str[*i] != '$' && !c_redi(str[*i]) && !v_spaces(str[*i]))
-			{
-				s = c_join(s, str[*i]);
-				++*i;
-			}
+			while (str[*i] && !ft_strchr("\'\">|< \t\v\r\f", str[*i]))
+				s = c_join(s, str[(*i)++]);
 		}
 	}
 	token_tolist(line, node_token(s, WORD));
@@ -99,6 +99,8 @@ char	*ft_double(t_envir *env, char *s, size_t *i)
 		{
 			if (s[*i] == '$')
 			{
+				if (s[*i] == '$' && !v_dollars(s[*i + 1]))
+					keep = c_join(keep, s[*i]);
 				keep = ft_strjoin(keep, expand_var(env, s, i));
 			}
 			else

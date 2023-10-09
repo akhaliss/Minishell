@@ -6,7 +6,7 @@
 /*   By: akhaliss <akhaliss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:33:48 by akhaliss          #+#    #+#             */
-/*   Updated: 2023/10/09 14:30:24 by akhaliss         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:23:21 by akhaliss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	_compar(char *line, char *en)
 
 char	*split_env_var(char *env_str, t_envir *env)
 {
-	env_str += 1;
 	while (env)
 	{
 		if (_compar(env_str, env->var))
